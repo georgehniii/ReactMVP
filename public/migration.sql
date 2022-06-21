@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS blogs;
+CREATE TABLE users (user_id SERIAL PRIMARY KEY, pass TEXT NOT NULL, email Text);
+CREATE TABLE blogs (blog_id SERIAL PRIMARY KEY, user_id INT REFERENCES users(user_id) NOT NULL, blogDate TEXT NOT NULL, title TEXT NOT NULL, fileLoc TEXT NOT NULL);

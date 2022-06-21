@@ -1,0 +1,10 @@
+DELETE FROM users;
+DELETE FROM blogs;
+INSERT INTO users (pass,email) VALUES ('password','someemail1@email.com');
+INSERT INTO users (pass,email) VALUES ('wordpass','someemail2@email.com');
+INSERT INTO users (pass,email) VALUES ('asd123','someemail3@email.com');
+INSERT INTO users (pass,email) VALUES ('123asd','someemail4@email.com');
+INSERT INTO blogs (user_id,blogDate,title,fileLoc) VALUES (1,'02-12-2022','someTitle1','./fileLocations/file1.txt');
+INSERT INTO blogs (user_id,blogDate,title,fileLoc) VALUES (2,'03-12-2022','someTitle2','./fileLocations/file2.txt');
+INSERT INTO blogs (user_id,blogDate,title,fileLoc) VALUES (3,'04-12-2022','someTitle3','./fileLocations/file3.txt');
+INSERT INTO blogs (user_id,blogDate,title,fileLoc) VALUES (4,'05-12-2022','someTitle4','./fileLocations/file4.txt');
