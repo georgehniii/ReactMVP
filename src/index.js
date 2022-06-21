@@ -5,15 +5,16 @@ import App from './App';
 import Header from './Header'
 import reportWebVitals from './reportWebVitals';
 
-const header = ReactDOM.createRoot(document.getElementsByID('header'));
+//const header = ReactDOM.createRoot(document.getElementsByID('header'));
 const root = ReactDOM.createRoot(document.getElementById('root'));
-header.render(
-  <React.StrictMode>
-    <Header />
-  </React.StrictMode>
-);
+// header.render(
+//   <React.StrictMode>
+//     <Header />
+//   </React.StrictMode>
+// );
 root.render(
   <React.StrictMode>
+    <Header />
     <App />
   </React.StrictMode>
 );

@@ -1,6 +1,7 @@
 import React from 'react'
 import Loading from './components/Loading'
 import Home from './components/Home'
+import Login from './components/Login'
 
 class App extends React.Component {
   constructor(props) {
@@ -13,11 +14,9 @@ class App extends React.Component {
     }
   }
 
-  // componentDidMount() {
-  //   fetch('https://jsonplaceholder.typicode.com/todos/')
-  //   .then((response) => response.json())
-  //   .then((data) => this.setState({todos: data, loading: false}))
-  // }
+  componentDidMount() {
+   this.setState({loading: false});
+  }
 
   render() {
 
@@ -35,11 +34,16 @@ class App extends React.Component {
         <Loading loadingMessage={this.state.loadingMessage}/>
       )
     }
+    if (this.state.user == null){
+      return (
+        <Login user={this.state.user}/>
+      )
+    }
     
     return (
-      <Home user={this.state.user}/>
-      // !this.state.home ? <Home home={this.state.home}/>
-      // : <SingleTodo singleTodo={this.state.singleTodo} changeSingleState={changeSingleState}/>
+      <Home home={this.state.home}/>
+      // this.state.user ? <Home home={this.state.home}/>
+      // : <Login user={this.state.user}/>
     )
   }
 }

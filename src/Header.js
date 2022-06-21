@@ -11,11 +11,9 @@ class Header extends React.Component {
     }
   }
 
-  // componentDidMount() {
-  //   fetch('https://jsonplaceholder.typicode.com/todos/')
-  //   .then((response) => response.json())
-  //   .then((data) => this.setState({todos: data, loading: false}))
-  // }
+  componentDidMount() {
+    this.setState({loading: false})
+  }
 
   render() {
 
