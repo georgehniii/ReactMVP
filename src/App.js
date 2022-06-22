@@ -2,7 +2,7 @@ import React from 'react'
 import Loading from './components/Loading'
 import Home from './components/Home'
 import Login from './components/Login'
-import BlogBox from './components/BlogBox'
+import SingleBlog from './components/SingleBlog'
 const port = process.env.PORT || 5555;
 
 class App extends React.Component {
@@ -39,13 +39,13 @@ class App extends React.Component {
     //   .then((data) => this.setState({blog: data}))
     // }
     const changeSingleBlog = () => {
-      this.setState({singleBlog: null})
+      this.setState({home: true, singleBlog: null})
     }
 
     const setSingleBlog = (e) => {
-      fetch(`localhost:${port}/blog/${e.target.id}`)
+      fetch(`/blog/${e.target.id}`)
       .then((response) => response.json())
-      .then((data) => this.setState({singleBlog: data}))
+      .then((data) => this.setState({home: false, singleBlog: data}))
     }
 
     if(this.state.loading) {
@@ -60,8 +60,8 @@ class App extends React.Component {
     }
     
     return (
-      this.state.home ? <Home blog={this.state.blog}/>
-      : <BlogBox singleBlog={this.state.singleBlog} changeSingleState={changeSingleBlog}/>
+      this.state.home ? <Home home={this.state.home} blog={this.state.blog} setSingleBlog={setSingleBlog}/>
+      : <SingleBlog singleBlog={this.state.singleBlog} changeSingleState={changeSingleBlog}/>
       // this.state.user ? <Home home={this.state.home}/>
       // : <Login user={this.state.user}/>
     )
