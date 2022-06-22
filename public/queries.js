@@ -55,25 +55,27 @@ const getBlogById = async (req, res) => {
 
 const createBlog = async (req, res) => {
     console.log("in create blog just before taking in req.body");
-    const {user_id,blogDate,title,fileLoc} = req.body
+    const {user_id,blogdate,title,fileloc} = req.body
     console.log(req.body);
     try{
-        pool.query('INSERT INTO blogs (user_id,blogDate,title,fileLoc) VALUES ($1, $2, $3, $4)', [user_id,blogDate,title,fileLoc])
+        pool.query('INSERT INTO blogs (user_id,blogdate,title,fileloc) VALUES ($1, $2, $3, $4)', [user_id,blogdate,title,fileloc]);
+        res.status(200);
     }
     catch (error){
         console.log(error);
     }
 }
 
-const updateItem = async (req, res) => {
+const updateBlog = async (req, res) => {
     console.log("in update query");
     const id = req.params.id;
-    const {category_id,item,price,qty} = req.body;
+    const {user_id,blogdate,title,fileloc} = req.body;
     
     console.log(id);
     try{
         pool.query(
-            'UPDATE items SET category_id = $1, item = $2, price = $3, qty = $4 WHERE item_id = $5', [category_id,item,price,qty,id]);
+            'UPDATE blogs SET user_id = $1, blogdate = $2, title = $3, fileloc = $4 WHERE blog_id = $5', [user_id,blogdate,title,fileloc,id]);
+            res.status(200);
             console.log("fully updated");
     }
     catch (error) {
@@ -81,16 +83,16 @@ const updateItem = async (req, res) => {
     }
 }
 
-const deleteItem = (req, res) => {
+const deleteBlog = (req, res) => {
    const id = req.params.id
     console.log("Last id " + id);
     
     pool.query(
-        `DELETE FROM items WHERE item_id = ${id}`, (err, results) => {
+        `DELETE FROM blogs WHERE blog_id = ${id}`, (err, results) => {
             if (err) {
                 throw err
               }
-              res.status(200).send(`Item deleted`)
+              res.status(200).send(`Blog deleted`)
         }
     )
 }
@@ -106,6 +108,6 @@ module.exports = {
     getBlogs,
     getBlogById,
     createBlog,
-    updateItem,
-    deleteItem
+    updateBlog,
+    deleteBlog
   }

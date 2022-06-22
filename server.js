@@ -12,10 +12,10 @@ app.use(express.static('public'));
 app.use(express.json());
 app.get('/home/login', db.passCheck);
 app.get('/home', db.getBlogs);
-app.get('/blog', db.getBlogById);
+app.get('/blog/:id', db.getBlogById);
 app.post('/blog', db.createBlog);
-app.patch('/blog/:id', db.updateItem);
-app.delete('/blog/:id', db.deleteItem);
+app.patch('/blog/:id', db.updateBlog);
+app.delete('/blog/:id', db.deleteBlog);
 app.use((req,res) => {
 res.status(404).send("Not Found");
 });
