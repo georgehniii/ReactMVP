@@ -2,6 +2,8 @@ import React from 'react'
 import Loading from './components/Loading'
 import Home from './components/Home'
 import Login from './components/Login'
+import BlogBox from './components/BlogBox'
+const port = process.env.PORT || 5555;
 
 class App extends React.Component {
   constructor(props) {
@@ -11,12 +13,15 @@ class App extends React.Component {
       user: "john",
       loading: true,
       blog: null,
-      loadingMessage: 'App is loading...'
+      singleBlog: null,
+      loadingMessage: `Connected to port:${port} App is loading...`
     }
   }
 
   componentDidMount() {
-   this.setState({loading: false});
+  fetch(`localhost:${port}/home`)
+  .then((response) => response.json())
+  .then((data) => this.setState({blog: data, loading: false}));
   }
 
   render() {
@@ -29,13 +34,19 @@ class App extends React.Component {
     // const changeSingleState = () => {
     //   this.setState({singleTodo: null})
     // }
-    const getBlog = (e) => {
-      fetch(`localhost5555/home`)
-      .then((response) => response.json())
-      .then((data) => this.setState({blog: data}))
+    // const getBlog = () => {
+    //   fetch(`localhost5555/home`)
+    //   .then((response) => response.json())
+    //   .then((data) => this.setState({blog: data}))
+    // }
+    const changeSingleBlog = () => {
+      this.setState({singleBlog: null})
     }
-    const changeBlog = () => {
-      this.setState({blog: null})
+
+    const setSingleBlog = (e) => {
+      fetch(`localhost:${port}/blog/${e.target.id}`)
+      .then((response) => response.json())
+      .then((data) => this.setState({singleBlog: data}))
     }
 
     if(this.state.loading) {
@@ -50,7 +61,8 @@ class App extends React.Component {
     }
     
     return (
-      <Home home={this.state.home} blog={this.state.blog}/>
+      this.state.home ? <Home blog={this.state.blog}/>
+      : <BlogBox singleBlog={this.state.singleBlog} changeSingleState={changeSingleBlog}/>
       // this.state.user ? <Home home={this.state.home}/>
       // : <Login user={this.state.user}/>
     )

@@ -6,7 +6,7 @@ class Home extends React.Component {
         return (
             <div className="blog">
                 <p>Welcome Home,</p>
-                {this.props.user}
+                {this.props.blog}
             </div>
         )
     }
