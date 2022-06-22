@@ -10,13 +10,12 @@ app.listen(port,function(){
 });
 app.use(express.static('public'));
 app.use(express.json());
-app.get('/items', db.getItems);
-app.get('/item/:id', db.getItemById);
-app.get('/category', db.getCategories);
-app.get('/category/:id',db.getItemsByCategory);
-app.post('/item', db.createItem);
-app.patch('/item/:id', db.updateItem);
-app.delete('/item/:id', db.deleteItem);
+app.get('/home/login', db.passCheck);
+app.get('/home', db.getBlogs);
+app.get('/blog', db.getBlogById);
+app.post('/blog', db.createBlog);
+app.patch('/blog/:id', db.updateItem);
+app.delete('/blog/:id', db.deleteItem);
 app.use((req,res) => {
-    res.status(404).send("Not Found");
+res.status(404).send("Not Found");
 });

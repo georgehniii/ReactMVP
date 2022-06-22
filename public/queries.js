@@ -15,51 +15,37 @@ const pool = new Pool({
     ssl: { rejectUnauthorized: false }
   });
 
-
-const getItems = async (req, res) => {
-    console.log("fetching items");
+const passCheck = async (req, res) => {
+    console.log("Checking user");
     try{
-        const data = await pool.query('SELECT * FROM items');
-        res.send(data.rows);
+        const data = await pool.query('SELECT * FROM users');
+        console.log(data);
+        res.send(data);
     }
     catch (error){
-        console.err(error);
+        console.log(error);
     }
    
   }
 
-const getItemById = async (req, res) => {
-    const id = req.params.id;
-    console.log("fetching item by id");
+const getBlogs = async (req, res) => {
+    console.log("fetching Blogs");
     try{
-        const data = await pool.query('SELECT * FROM items WHERE item_id = $1',[id]);
+        const data = await pool.query('SELECT * FROM blogs');
         res.send(data.rows);
-        res.status(200);
     }
     catch (error){
         console.log(error);
     }
-}
-
-const getCategories = async (req, res) => {
-    console.log("fetching categories");
-    try{
-        const data = await pool.query('SELECT * FROM categories');
-        res.send(data.rows);
-        res.status(200);
-    } 
-    catch (error){
-        console.err(error.message);
-    } 
+   
   }
 
-const getItemsByCategory = async (req, res) => {
-    console.log("fetching item by category");
+const getBlogById = async (req, res) => {
     const id = req.params.id;
+    console.log("fetching blog by id");
     try{
-        const data = await pool.query('SELECT * FROM items WHERE category_id = $1',[id]);
+        const data = await pool.query('SELECT * FROM blogs WHERE blog_id = $1',[id]);
         res.send(data.rows);
-        console.log(data.rows);
         res.status(200);
     }
     catch (error){
@@ -67,13 +53,12 @@ const getItemsByCategory = async (req, res) => {
     }
 }
 
-//have to fix the try cathces
-const createItem = async (req, res) => {
-    console.log("in create item just before taking in req.body");
-    const {category_id,item,price} = req.body
+const createBlog = async (req, res) => {
+    console.log("in create blog just before taking in req.body");
+    const {user_id,blogDate,title,fileLoc} = req.body
     console.log(req.body);
     try{
-        pool.query('INSERT INTO items (category_id,item,price) VALUES ($1, $2, $3)', [category_id,item,price])
+        pool.query('INSERT INTO blogs (user_id,blogDate,title,fileLoc) VALUES ($1, $2, $3, $4)', [user_id,blogDate,title,fileLoc])
     }
     catch (error){
         console.log(error);
@@ -117,11 +102,10 @@ const deleteItem = (req, res) => {
 
 
 module.exports = {
-    getItems,
-    getItemById,
-    getItemsByCategory,
-    getCategories,
-    createItem,
+    passCheck,
+    getBlogs,
+    getBlogById,
+    createBlog,
     updateItem,
     deleteItem
   }

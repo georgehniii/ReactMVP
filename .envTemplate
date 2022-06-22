@@ -1,0 +1,4 @@
+# my envorinment file
+PORT= 5555
+# Format: postgres://user:password@host:5432/database
+DATABASE_URL= postgres://puser:asd123@host:5432/advent

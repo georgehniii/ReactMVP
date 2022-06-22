@@ -8,8 +8,9 @@ class App extends React.Component {
     super(props)
     this.state = {
       home: true,
-      user: null,
+      user: "john",
       loading: true,
+      blog: null,
       loadingMessage: 'App is loading...'
     }
   }
@@ -28,6 +29,14 @@ class App extends React.Component {
     // const changeSingleState = () => {
     //   this.setState({singleTodo: null})
     // }
+    const getBlog = (e) => {
+      fetch(`localhost5555/home`)
+      .then((response) => response.json())
+      .then((data) => this.setState({blog: data}))
+    }
+    const changeBlog = () => {
+      this.setState({blog: null})
+    }
 
     if(this.state.loading) {
       return (
@@ -41,7 +50,7 @@ class App extends React.Component {
     }
     
     return (
-      <Home home={this.state.home}/>
+      <Home home={this.state.home} blog={this.state.blog}/>
       // this.state.user ? <Home home={this.state.home}/>
       // : <Login user={this.state.user}/>
     )
