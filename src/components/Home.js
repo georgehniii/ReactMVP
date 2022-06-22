@@ -1,13 +1,13 @@
 import React from 'react'
+import BlogBox from './BlogBox'
 
 class Home extends React.Component {
     
     render() {
         return (
-            <div className="blog">
-                <p>Welcome Home,</p>
-                {this.props.blog}
-            </div>
+            this.props.blog.map((elem) => {
+                return <BlogBox elem={elem} key={elem.id} setSingleBlog={this.props.setSingleBlog}/>
+            })
         )
     }
 }

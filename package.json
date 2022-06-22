@@ -20,8 +20,10 @@
     "start": "PORT=3000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serverStart": "nodemon server.js"
   },
+  "proxy": "http://localhost:5555",
   "eslintConfig": {
     "extends": [
       "react-app",

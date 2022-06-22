@@ -17,15 +17,14 @@ class App extends React.Component {
       loadingMessage: `Connected to port:${port} App is loading...`
     }
   }
-
+  
   componentDidMount() {
-  fetch(`localhost:${port}/home`)
+  fetch(`/home`)
   .then((response) => response.json())
   .then((data) => this.setState({blog: data, loading: false}));
   }
 
   render() {
-
     // const setSingleTodo = (e) => {
     //   fetch(`https://jsonplaceholder.typicode.com/todos/${e.target.id}`)
     //   .then((response) => response.json())
