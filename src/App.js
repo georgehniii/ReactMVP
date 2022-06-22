@@ -48,6 +48,12 @@ class App extends React.Component {
       .then((data) => this.setState({home: false, singleBlog: data}))
     }
 
+    const deleteBlogbyId = (id) => {
+      fetch(`/blog/${id}`, {method: 'DELETE'})
+      .then((data) => this.setState({home: true, singleBlog: null}))
+    }
+    
+
     if(this.state.loading) {
       return (
         <Loading loadingMessage={this.state.loadingMessage}/>
@@ -61,7 +67,7 @@ class App extends React.Component {
     
     return (
       this.state.home ? <Home home={this.state.home} blog={this.state.blog} setSingleBlog={setSingleBlog}/>
-      : <SingleBlog singleBlog={this.state.singleBlog} changeSingleState={changeSingleBlog}/>
+      : <SingleBlog singleBlog={this.state.singleBlog} changeSingleState={changeSingleBlog} deleteBlogbyId={deleteBlogbyId}/>
       // this.state.user ? <Home home={this.state.home}/>
       // : <Login user={this.state.user}/>
     )

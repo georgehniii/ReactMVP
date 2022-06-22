@@ -1,7 +1,7 @@
 import React from 'react'
 import Loading from './components/Loading'
 import Title from './components/Title'
-
+import App from "./App"
 class Header extends React.Component {
   constructor(props) {
     super(props)
@@ -25,7 +25,7 @@ class Header extends React.Component {
     // const changeSingleState = () => {
     //   this.setState({singleTodo: null})
     // }
-
+    
     if(this.state.loading) {
       return (
         <Loading loadingMessage={this.state.loadingMessage}/>
